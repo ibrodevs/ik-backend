@@ -42,6 +42,21 @@ INSTALLED_APPS = [
     'media',
 ]
 
+BUCKETEER_AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
+BUCKETEER_AWS_SECRET_ACCESS_KEY = os.environ.get('BUCKETEER_AWS_SECRET_ACCESS_KEY')
+BUCKETEER_AWS_REGION = os.environ.get('BUCKETEER_AWS_REGION')
+BUCKETEER_BUCKET_NAME = os.environ.get('BUCKETEER_BUCKET_NAME')
+
+USE_S3_MEDIA = all([
+    BUCKETEER_AWS_ACCESS_KEY_ID,
+    BUCKETEER_AWS_SECRET_ACCESS_KEY,
+    BUCKETEER_AWS_REGION,
+    BUCKETEER_BUCKET_NAME,
+])
+
+if USE_S3_MEDIA:
+    INSTALLED_APPS.append('storages')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -105,8 +120,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+if USE_S3_MEDIA:
+    AWS_ACCESS_KEY_ID = BUCKETEER_AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = BUCKETEER_AWS_SECRET_ACCESS_KEY
+    AWS_STORAGE_BUCKET_NAME = BUCKETEER_BUCKET_NAME
+    AWS_S3_REGION_NAME = BUCKETEER_AWS_REGION
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_LOCATION = 'media'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = (
+        f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/'
+        f'{AWS_LOCATION}/'
+    )
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
