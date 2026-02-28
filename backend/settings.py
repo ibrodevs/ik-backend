@@ -126,7 +126,9 @@ if USE_S3_MEDIA:
     AWS_SECRET_ACCESS_KEY = BUCKETEER_AWS_SECRET_ACCESS_KEY
     AWS_STORAGE_BUCKET_NAME = BUCKETEER_BUCKET_NAME
     AWS_S3_REGION_NAME = BUCKETEER_AWS_REGION
-    AWS_DEFAULT_ACL = 'public-read'
+    # Bucketeer/S3 buckets often run with ACLs disabled (Object Ownership enforced).
+    # Keep ACL unset and expose files via bucket policy instead.
+    AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'media'
