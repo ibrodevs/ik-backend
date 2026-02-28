@@ -29,6 +29,7 @@ heroku login
 heroku git:remote -a ik-backend-780b39b1dc1f
 heroku config:set SECRET_KEY='your-secret' DEBUG=False
 heroku config:set ALLOWED_HOSTS='ik-backend-780b39b1dc1f.herokuapp.com'
+heroku config:set CORS_ALLOWED_ORIGINS='https://issyk-kul.vercel.app,http://localhost:5173'
 git push heroku main
 heroku run python manage.py seed_test_data
 ```
