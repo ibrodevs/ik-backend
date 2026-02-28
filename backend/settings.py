@@ -14,6 +14,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
     'ik-backend-780b39b1dc1f.herokuapp.com',
+    'issyk-kul.vercel.app',
     'localhost',
     '127.0.0.1',
 ]
@@ -24,6 +25,7 @@ if extra_hosts:
 
 CSRF_TRUSTED_ORIGINS = [
     'https://ik-backend-780b39b1dc1f.herokuapp.com',
+    'https://issyk-kul.vercel.app',
 ]
 
 INSTALLED_APPS = [
