@@ -15,6 +15,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 ALLOWED_HOSTS = [
     'ik-backend-780b39b1dc1f.herokuapp.com',
     'issyk-kul.vercel.app',
+    'isykkol.kg',
     'localhost',
     '127.0.0.1',
 ]
@@ -26,12 +27,14 @@ if extra_hosts:
 CSRF_TRUSTED_ORIGINS = [
     'https://ik-backend-780b39b1dc1f.herokuapp.com',
     'https://issyk-kul.vercel.app',
+    'http://isykkol.kg'
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'https://issyk-kul.vercel.app',
+    'http://isykkol.kg'
 ]
 
 extra_cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', '')
