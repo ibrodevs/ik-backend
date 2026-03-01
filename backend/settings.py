@@ -28,7 +28,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://ik-backend-780b39b1dc1f.herokuapp.com',
     'https://issyk-kul.vercel.app',
     'http://isykkol.kg',
-    'https://www.isykkol.kg'
+    'https://www.isykkol.kg',
+    'http://www.isykkol.kg'
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -36,7 +37,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'https://issyk-kul.vercel.app',
     'http://isykkol.kg',
-    'https://www.isykkol.kg'
+    'https://www.isykkol.kg',
+    'http://www.isykkol.kg'
 ]
 
 extra_cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', '')
