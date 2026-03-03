@@ -29,6 +29,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://issyk-kul.vercel.app',
     'http://isykkol.kg',
     'https://www.isykkol.kg',
+    'https://isykkol.kg',
     'http://www.isykkol.kg'
 ]
 
@@ -38,6 +39,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://issyk-kul.vercel.app',
     'http://isykkol.kg',
     'https://www.isykkol.kg',
+    'https://isykkol.kg',
     'http://www.isykkol.kg'
 ]
 
