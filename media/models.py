@@ -13,6 +13,8 @@ class MediaCategory(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
+        verbose_name = 'Категория медиа'
+        verbose_name_plural = 'Категории медиа'
 
     def __str__(self):
         return self.name_ru
@@ -50,6 +52,8 @@ class MediaItem(models.Model):
 
     class Meta:
         ordering = ('order', '-created_at', '-id')
+        verbose_name = 'Медиафайл'
+        verbose_name_plural = 'Медиафайлы'
 
     def clean(self):
         super().clean()

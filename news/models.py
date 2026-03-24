@@ -14,6 +14,8 @@ class NewsCategory(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
+        verbose_name = 'Категория новости'
+        verbose_name_plural = 'Категории новостей'
 
     def __str__(self):
         return self.name_ru
@@ -48,6 +50,8 @@ class News(models.Model):
 
     class Meta:
         ordering = ('-date', '-id')
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
         constraints = [
             models.UniqueConstraint(
                 fields=['is_main'],
