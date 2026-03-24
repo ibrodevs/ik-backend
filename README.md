@@ -17,10 +17,16 @@ DEBUG=True python manage.py runserver
 ```
 
 ## Тестовые данные
-Команда заполняет все сущности тестовыми данными (категории, новости, отделы, руководители, достопримечательности, галерея, медиа):
+Команда заполняет все сущности тестовыми данными (категории, новости, отделы, руководители, достопримечательности, галерея, медиа, руководство, документы, закупки и проекты):
 
 ```bash
 DEBUG=True python manage.py seed_test_data
+```
+
+Для Heroku есть безопасная команда, которая создаёт демо-данные только если таблицы ещё пустые:
+
+```bash
+python manage.py ensure_seed_data
 ```
 
 ## Деплой в Heroku
@@ -31,8 +37,9 @@ heroku config:set SECRET_KEY='your-secret' DEBUG=False
 heroku config:set ALLOWED_HOSTS='ik-backend-780b39b1dc1f.herokuapp.com'
 heroku config:set CORS_ALLOWED_ORIGINS='https://issyk-kul.vercel.app,http://localhost:5173'
 git push heroku main
-heroku run python manage.py seed_test_data
 ```
+
+`release` в `Procfile` теперь выполняет `migrate` и затем `ensure_seed_data`, поэтому на пустой базе Heroku демо-данные создадутся автоматически без удаления уже существующего контента.
 
 ## API
 Base URL: `/api/`
@@ -204,6 +211,26 @@ Response item:
 
 `GET /api/media-categories/{id}/` - тот же формат одного объекта.
 
+### Leadership members
+`GET /api/leadership-members/`
+
+`GET /api/leadership-members/{id}/` - тот же формат одного объекта.
+
+### Documents
+`GET /api/documents/`
+
+`GET /api/documents/{id}/` - тот же формат одного объекта.
+
+### Procurements and tenders
+`GET /api/procurements/`
+
+`GET /api/procurements/{id}/` - тот же формат одного объекта.
+
+### Projects and state programs
+`GET /api/projects/`
+
+`GET /api/projects/{id}/` - тот же формат одного объекта.
+
 ## Admin endpoints (нужен Token)
 - `GET|POST /api/admin/news/`
 - `GET|PUT|PATCH|DELETE /api/admin/news/{id}/`
@@ -223,3 +250,11 @@ Response item:
 - `GET|PUT|PATCH|DELETE /api/admin/media/{id}/`
 - `GET|POST /api/admin/media-categories/`
 - `GET|PUT|PATCH|DELETE /api/admin/media-categories/{id}/`
+- `GET|POST /api/admin/leadership-members/`
+- `GET|PUT|PATCH|DELETE /api/admin/leadership-members/{id}/`
+- `GET|POST /api/admin/documents/`
+- `GET|PUT|PATCH|DELETE /api/admin/documents/{id}/`
+- `GET|POST /api/admin/procurements/`
+- `GET|PUT|PATCH|DELETE /api/admin/procurements/{id}/`
+- `GET|POST /api/admin/projects/`
+- `GET|PUT|PATCH|DELETE /api/admin/projects/{id}/`

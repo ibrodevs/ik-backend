@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'sights',
     'departments',
     'media',
+    'office_content',
 ]
 
 BUCKETEER_AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
