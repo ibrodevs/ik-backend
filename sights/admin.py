@@ -24,7 +24,7 @@ class SightAdmin(admin.ModelAdmin):
         models.TextField: {'widget': CKEditorWidget},
     }
 
-    @admin.display(description='Preview')
+    @admin.display(description='Превью')
     def thumb(self, obj):
         if not obj.main_image:
             return '-'
@@ -37,7 +37,7 @@ class SightImageAdmin(admin.ModelAdmin):
     list_filter = ('sight',)
     ordering = ('order', 'id')
 
-    @admin.display(description='Preview')
+    @admin.display(description='Превью')
     def thumb(self, obj):
         if not obj.image:
             return '-'

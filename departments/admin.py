@@ -24,7 +24,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         models.TextField: {'widget': CKEditorWidget},
     }
 
-    @admin.display(description='Icon')
+    @admin.display(description='Иконка')
     def icon_preview(self, obj):
         if not obj.icon:
             return '-'
@@ -39,7 +39,7 @@ class DepartmentLeaderAdmin(admin.ModelAdmin):
     list_filter = ('department',)
     search_fields = ('full_name', 'position_ru', 'position_en', 'position_kg')
 
-    @admin.display(description='Photo')
+    @admin.display(description='Фото')
     def photo_preview(self, obj):
         if not obj.photo:
             return '-'
