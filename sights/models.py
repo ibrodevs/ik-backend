@@ -26,6 +26,8 @@ class Sight(models.Model):
 
     class Meta:
         ordering = ('-created_at', '-id')
+        verbose_name = 'Достопримечательность'
+        verbose_name_plural = 'Достопримечательности'
 
     def __str__(self):
         return self.title_ru
@@ -44,6 +46,8 @@ class SightImage(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
+        verbose_name = 'Изображение достопримечательности'
+        verbose_name_plural = 'Изображения достопримечательностей'
 
     def __str__(self):
         return f'{self.sight_id}#{self.id}'

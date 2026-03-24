@@ -23,8 +23,8 @@ class LeadershipMember(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
-        verbose_name = 'Leadership Member'
-        verbose_name_plural = 'Leadership Members'
+        verbose_name = 'Руководитель'
+        verbose_name_plural = 'Руководство'
 
     def __str__(self):
         return self.full_name_ru
@@ -66,8 +66,8 @@ class OfficialDocument(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
-        verbose_name = 'Official Document'
-        verbose_name_plural = 'Official Documents'
+        verbose_name = 'Официальный документ'
+        verbose_name_plural = 'Официальные документы'
 
     def __str__(self):
         return self.title_ru
@@ -101,8 +101,8 @@ class ProcurementItem(models.Model):
 
     class Meta:
         ordering = ('order', 'deadline', 'id')
-        verbose_name = 'Procurement Item'
-        verbose_name_plural = 'Procurement Items'
+        verbose_name = 'Закупка или тендер'
+        verbose_name_plural = 'Закупки и тендеры'
 
     def __str__(self):
         return self.title_ru
@@ -142,8 +142,8 @@ class Project(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
-        verbose_name = 'Project'
-        verbose_name_plural = 'Projects'
+        verbose_name = 'Проект или программа'
+        verbose_name_plural = 'Проекты и программы'
 
     def __str__(self):
         return self.title_ru

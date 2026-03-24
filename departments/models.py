@@ -12,6 +12,8 @@ class DepartmentCategory(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
+        verbose_name = 'Категория подразделения'
+        verbose_name_plural = 'Категории подразделений'
 
     def __str__(self):
         return self.name_ru
@@ -39,6 +41,8 @@ class Department(models.Model):
 
     class Meta:
         ordering = ('order', 'id')
+        verbose_name = 'Подразделение'
+        verbose_name_plural = 'Подразделения'
 
     def __str__(self):
         return self.title_ru
@@ -62,6 +66,10 @@ class DepartmentLeader(models.Model):
     address_ru = models.CharField(max_length=255, blank=True)
     address_en = models.CharField(max_length=255, blank=True)
     address_kg = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = 'Руководитель подразделения'
+        verbose_name_plural = 'Руководители подразделений'
 
     def __str__(self):
         return self.full_name
