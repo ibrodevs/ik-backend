@@ -24,7 +24,7 @@ class NewsAdmin(admin.ModelAdmin):
         models.TextField: {'widget': CKEditorWidget},
     }
 
-    @admin.display(description='Preview')
+    @admin.display(description='Превью')
     def thumb(self, obj):
         if not obj.image:
             return '-'

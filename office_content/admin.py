@@ -20,7 +20,7 @@ class LeadershipMemberAdmin(admin.ModelAdmin):
     )
     ordering = ('order', 'id')
 
-    @admin.display(description='Photo')
+    @admin.display(description='Фото')
     def photo_preview(self, obj):
         if not obj.photo:
             return '-'
@@ -59,7 +59,7 @@ class ProjectAdmin(admin.ModelAdmin):
         models.TextField: {'widget': CKEditorWidget},
     }
 
-    @admin.display(description='Preview')
+    @admin.display(description='Превью')
     def image_preview(self, obj):
         if not obj.image:
             return '-'

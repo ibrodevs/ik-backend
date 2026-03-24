@@ -19,7 +19,7 @@ class MediaItemAdmin(admin.ModelAdmin):
     ordering = ('order', '-created_at', '-id')
     search_fields = ('title_ru', 'title_en', 'title_kg')
 
-    @admin.display(description='Preview')
+    @admin.display(description='Превью')
     def preview(self, obj):
         file_name = str(obj.file.name).lower() if obj.file else ''
         if obj.type == MediaItem.TYPE_VIDEO:
