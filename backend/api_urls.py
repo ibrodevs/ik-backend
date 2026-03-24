@@ -19,6 +19,16 @@ from news.views import (
     NewsCategoryPublicViewSet,
     NewsPublicViewSet,
 )
+from office_content.views import (
+    LeadershipMemberAdminViewSet,
+    LeadershipMemberPublicViewSet,
+    OfficialDocumentAdminViewSet,
+    OfficialDocumentPublicViewSet,
+    ProcurementItemAdminViewSet,
+    ProcurementItemPublicViewSet,
+    ProjectAdminViewSet,
+    ProjectPublicViewSet,
+)
 from sights.views import SightAdminViewSet, SightImageAdminViewSet, SightPublicViewSet
 
 router = DefaultRouter()
@@ -31,6 +41,10 @@ router.register(r'departments', DepartmentPublicViewSet, basename='departments-p
 router.register(r'department-categories', DepartmentCategoryPublicViewSet, basename='department-category-public')
 router.register(r'media', MediaItemPublicViewSet, basename='media-public')
 router.register(r'media-categories', MediaCategoryPublicViewSet, basename='media-category-public')
+router.register(r'leadership-members', LeadershipMemberPublicViewSet, basename='leadership-member-public')
+router.register(r'documents', OfficialDocumentPublicViewSet, basename='document-public')
+router.register(r'procurements', ProcurementItemPublicViewSet, basename='procurement-public')
+router.register(r'projects', ProjectPublicViewSet, basename='project-public')
 
 # Admin API
 router.register(r'admin/news', NewsAdminViewSet, basename='news-admin')
@@ -42,5 +56,9 @@ router.register(r'admin/department-categories', DepartmentCategoryAdminViewSet, 
 router.register(r'admin/department-leaders', DepartmentLeaderAdminViewSet, basename='department-leader-admin')
 router.register(r'admin/media', MediaItemAdminViewSet, basename='media-admin')
 router.register(r'admin/media-categories', MediaCategoryAdminViewSet, basename='media-category-admin')
+router.register(r'admin/leadership-members', LeadershipMemberAdminViewSet, basename='leadership-member-admin')
+router.register(r'admin/documents', OfficialDocumentAdminViewSet, basename='document-admin')
+router.register(r'admin/procurements', ProcurementItemAdminViewSet, basename='procurement-admin')
+router.register(r'admin/projects', ProjectAdminViewSet, basename='project-admin')
 
 urlpatterns = router.urls

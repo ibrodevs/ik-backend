@@ -20,6 +20,14 @@ Base URL: `/api/`
 - `GET /api/media/{id}/`
 - `GET /api/media-categories/`
 - `GET /api/media-categories/{id}/`
+- `GET /api/leadership-members/`
+- `GET /api/leadership-members/{id}/`
+- `GET /api/documents/`
+- `GET /api/documents/{id}/`
+- `GET /api/procurements/`
+- `GET /api/procurements/{id}/`
+- `GET /api/projects/`
+- `GET /api/projects/{id}/`
 
 ## Admin endpoints (требуют аутентификацию)
 - `GET|POST /api/admin/news/`
@@ -40,3 +48,11 @@ Base URL: `/api/`
 - `GET|PUT|PATCH|DELETE /api/admin/media/{id}/`
 - `GET|POST /api/admin/media-categories/`
 - `GET|PUT|PATCH|DELETE /api/admin/media-categories/{id}/`
+- `GET|POST /api/admin/leadership-members/`
+- `GET|PUT|PATCH|DELETE /api/admin/leadership-members/{id}/`
+- `GET|POST /api/admin/documents/`
+- `GET|PUT|PATCH|DELETE /api/admin/documents/{id}/`
+- `GET|POST /api/admin/procurements/`
+- `GET|PUT|PATCH|DELETE /api/admin/procurements/{id}/`
+- `GET|POST /api/admin/projects/`
+- `GET|PUT|PATCH|DELETE /api/admin/projects/{id}/`
