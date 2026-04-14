@@ -10,3 +10,4 @@ Pillow>=10.0,<12.0
 django-storages>=1.14,<2.0
 boto3>=1.34,<2.0
 django-admin-soft-dashboard>=1.0,<2.0
+python-dotenv
