@@ -3,11 +3,12 @@ from django.db import models
 from django.utils.html import format_html
 from ckeditor.widgets import CKEditorWidget
 
+from backend.admin_utils import ClickableRowMixin
 from .models import LeadershipMember, OfficialDocument, ProcurementItem, Project
 
 
 @admin.register(LeadershipMember)
-class LeadershipMemberAdmin(admin.ModelAdmin):
+class LeadershipMemberAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'full_name_ru', 'position_ru', 'order', 'is_active', 'photo_preview')
     list_filter = ('is_active',)
     search_fields = (
@@ -31,7 +32,7 @@ class LeadershipMemberAdmin(admin.ModelAdmin):
 
 
 @admin.register(OfficialDocument)
-class OfficialDocumentAdmin(admin.ModelAdmin):
+class OfficialDocumentAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'category', 'order', 'is_active')
     list_filter = ('is_active', 'category')
     search_fields = ('title_ru', 'title_en', 'title_kg')
@@ -39,7 +40,7 @@ class OfficialDocumentAdmin(admin.ModelAdmin):
 
 
 @admin.register(ProcurementItem)
-class ProcurementItemAdmin(admin.ModelAdmin):
+class ProcurementItemAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'type', 'amount_som', 'deadline', 'order', 'is_active')
     list_filter = ('is_active', 'type')
     search_fields = ('title_ru', 'title_en', 'title_kg')
@@ -50,7 +51,7 @@ class ProcurementItemAdmin(admin.ModelAdmin):
 
 
 @admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'type', 'order', 'is_active', 'image_preview')
     list_filter = ('is_active', 'type')
     search_fields = ('title_ru', 'title_en', 'title_kg')

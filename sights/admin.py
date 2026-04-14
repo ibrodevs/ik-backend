@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.html import format_html
 from ckeditor.widgets import CKEditorWidget
 
+from backend.admin_utils import ClickableRowMixin
 from .models import Sight, SightImage
 
 
@@ -14,7 +15,7 @@ class SightImageInline(admin.TabularInline):
 
 
 @admin.register(Sight)
-class SightAdmin(admin.ModelAdmin):
+class SightAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'is_active', 'thumb')
     list_filter = ('is_active',)
     search_fields = ('title_ru', 'title_en', 'title_kg')
@@ -32,7 +33,7 @@ class SightAdmin(admin.ModelAdmin):
 
 
 @admin.register(SightImage)
-class SightImageAdmin(admin.ModelAdmin):
+class SightImageAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'sight', 'order', 'thumb')
     list_filter = ('sight',)
     ordering = ('order', 'id')
