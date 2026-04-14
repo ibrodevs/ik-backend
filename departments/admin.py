@@ -3,11 +3,12 @@ from django.db import models
 from django.utils.html import format_html
 from ckeditor.widgets import CKEditorWidget
 
+from backend.admin_utils import ClickableRowMixin
 from .models import Department, DepartmentCategory, DepartmentLeader
 
 
 @admin.register(DepartmentCategory)
-class DepartmentCategoryAdmin(admin.ModelAdmin):
+class DepartmentCategoryAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'name_ru', 'slug', 'order', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('name_ru', 'name_en', 'name_kg', 'slug')
@@ -15,7 +16,7 @@ class DepartmentCategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Department)
-class DepartmentAdmin(admin.ModelAdmin):
+class DepartmentAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'category', 'order', 'is_active', 'icon_preview')
     list_filter = ('is_active', 'category')
     search_fields = ('title_ru', 'title_en', 'title_kg')
@@ -34,7 +35,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 @admin.register(DepartmentLeader)
-class DepartmentLeaderAdmin(admin.ModelAdmin):
+class DepartmentLeaderAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'full_name', 'department', 'email', 'phone', 'photo_preview')
     list_filter = ('department',)
     search_fields = ('full_name', 'position_ru', 'position_en', 'position_kg')

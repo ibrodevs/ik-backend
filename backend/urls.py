@@ -10,6 +10,7 @@ admin.site.index_title = 'Управление контентом'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('admin_soft.urls')),
     path('api/auth/token/', obtain_auth_token, name='api-token-auth'),
     path('api/', include('backend.api_urls')),
 ]

@@ -3,11 +3,12 @@ from django.db import models
 from django.utils.html import format_html
 from ckeditor.widgets import CKEditorWidget
 
+from backend.admin_utils import ClickableRowMixin
 from .models import News, NewsCategory
 
 
 @admin.register(NewsCategory)
-class NewsCategoryAdmin(admin.ModelAdmin):
+class NewsCategoryAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'name_ru', 'slug', 'order', 'is_active')
     list_filter = ('is_active',)
     ordering = ('order', 'id')
@@ -15,7 +16,7 @@ class NewsCategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(ClickableRowMixin, admin.ModelAdmin):
     list_display = ('id', 'title_ru', 'category', 'date', 'is_hot', 'is_main', 'is_active', 'thumb')
     list_filter = ('is_active', 'category', 'is_hot', 'is_main')
     search_fields = ('title_ru', 'title_en', 'title_kg')
