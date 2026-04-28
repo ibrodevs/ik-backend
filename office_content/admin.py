@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from ckeditor.widgets import CKEditorWidget
 
 from backend.admin_utils import ClickableRowMixin
-from .models import LeadershipMember, OfficialDocument, ProcurementItem, Project
+from .models import Employee, LeadershipMember, OfficialDocument, ProcurementItem, Project
 
 
 @admin.register(LeadershipMember)
@@ -18,6 +18,32 @@ class LeadershipMemberAdmin(ClickableRowMixin, admin.ModelAdmin):
         'position_ru',
         'position_en',
         'position_kg',
+    )
+    ordering = ('order', 'id')
+
+    @admin.display(description='Фото')
+    def photo_preview(self, obj):
+        if not obj.photo:
+            return '-'
+        return format_html(
+            '<img src="{}" width="40" height="40" style="object-fit:cover;border-radius:4px;"/>',
+            obj.photo.url,
+        )
+
+
+@admin.register(Employee)
+class EmployeeAdmin(ClickableRowMixin, admin.ModelAdmin):
+    list_display = ('id', 'full_name_ru', 'position_ru', 'phone', 'email', 'order', 'is_active', 'photo_preview')
+    list_filter = ('is_active',)
+    search_fields = (
+        'full_name_ru',
+        'full_name_en',
+        'full_name_kg',
+        'position_ru',
+        'position_en',
+        'position_kg',
+        'phone',
+        'email',
     )
     ordering = ('order', 'id')
 

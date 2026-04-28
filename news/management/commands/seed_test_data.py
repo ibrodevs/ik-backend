@@ -11,6 +11,7 @@ from departments.models import Department, DepartmentCategory, DepartmentLeader
 from media.models import MediaCategory, MediaItem
 from news.models import News, NewsCategory
 from office_content.models import (
+    Employee,
     LeadershipMember,
     OfficialDocument,
     ProcurementItem,
@@ -76,6 +77,7 @@ class Command(BaseCommand):
         News.objects.all().delete()
         MediaItem.objects.all().delete()
         LeadershipMember.objects.all().delete()
+        Employee.objects.all().delete()
         OfficialDocument.objects.all().delete()
         ProcurementItem.objects.all().delete()
         Project.objects.all().delete()
@@ -320,6 +322,54 @@ class Command(BaseCommand):
                 position_en=item[4],
                 position_kg=item[5],
                 photo=make_png("office_leadership"),
+                order=idx,
+                is_active=True,
+            )
+
+        self.stdout.write("Creating office employees...")
+        employee_items = [
+            (
+                "Иванов Сергей Петрович",
+                "Sergey Ivanov",
+                "Иванов Сергей Петрович",
+                "Главный специалист",
+                "Chief Specialist",
+                "Башкы адис",
+                "+996555123456",
+                "ivanov@issyk-kul.gov.kg",
+            ),
+            (
+                "Касымова Алина Руслановна",
+                "Alina Kasymova",
+                "Касымова Алина Руслановна",
+                "Ведущий консультант",
+                "Senior Consultant",
+                "Жетектөөчү консультант",
+                "+996700987654",
+                "kasymova@issyk-kul.gov.kg",
+            ),
+            (
+                "Бектуров Нурлан Азаматович",
+                "Nurlan Bekturov",
+                "Бектуров Нурлан Азаматович",
+                "Начальник отдела",
+                "Department Head",
+                "Бөлүм башчысы",
+                "+996777456789",
+                "bekturov@issyk-kul.gov.kg",
+            ),
+        ]
+        for idx, item in enumerate(employee_items, start=1):
+            Employee.objects.create(
+                full_name_ru=item[0],
+                full_name_en=item[1],
+                full_name_kg=item[2],
+                position_ru=item[3],
+                position_en=item[4],
+                position_kg=item[5],
+                phone=item[6],
+                email=item[7],
+                photo=make_png("office_employee"),
                 order=idx,
                 is_active=True,
             )

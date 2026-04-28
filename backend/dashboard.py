@@ -3,7 +3,7 @@ from django.utils import timezone
 from news.models import News, NewsCategory
 from sights.models import Sight, SightImage
 from departments.models import Department, DepartmentCategory, DepartmentLeader
-from office_content.models import LeadershipMember, OfficialDocument, ProcurementItem, Project
+from office_content.models import Employee, LeadershipMember, OfficialDocument, ProcurementItem, Project
 
 
 def dashboard_context(request):
@@ -38,6 +38,7 @@ def dashboard_context(request):
     projects_active = Project.objects.filter(is_active=True).count()
 
     leadership_total = LeadershipMember.objects.count()
+    employees_total = Employee.objects.count()
 
     # Recent news (last 5)
     recent_news = News.objects.select_related('category').order_by('-date')[:5]
@@ -64,6 +65,7 @@ def dashboard_context(request):
             'projects_total': projects_total,
             'projects_active': projects_active,
             'leadership_total': leadership_total,
+            'employees_total': employees_total,
             'recent_news': recent_news,
             'recent_projects': recent_projects,
         }

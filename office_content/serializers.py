@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from backend.api_utils import absolute_file_url, localized_value
-from .models import LeadershipMember, OfficialDocument, ProcurementItem, Project
+from .models import Employee, LeadershipMember, OfficialDocument, ProcurementItem, Project
 
 
 def localized_file(obj, field_base, lang):
@@ -16,6 +16,25 @@ class LeadershipMemberPublicSerializer(serializers.ModelSerializer):
     class Meta:
         model = LeadershipMember
         fields = ('id', 'full_name', 'position', 'photo', 'order')
+
+    def get_full_name(self, obj):
+        return localized_value(obj, 'full_name', self.context['lang'])
+
+    def get_position(self, obj):
+        return localized_value(obj, 'position', self.context['lang'])
+
+    def get_photo(self, obj):
+        return absolute_file_url(self.context['request'], obj.photo)
+
+
+class EmployeePublicSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+    position = serializers.SerializerMethodField()
+    photo = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Employee
+        fields = ('id', 'full_name', 'position', 'phone', 'email', 'photo', 'order')
 
     def get_full_name(self, obj):
         return localized_value(obj, 'full_name', self.context['lang'])
@@ -84,6 +103,19 @@ class ProjectPublicSerializer(serializers.ModelSerializer):
 class LeadershipMemberAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = LeadershipMember
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        request = self.context.get('request')
+        if request:
+            data['photo'] = absolute_file_url(request, instance.photo)
+        return data
+
+
+class EmployeeAdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
         fields = '__all__'
 
     def to_representation(self, instance):

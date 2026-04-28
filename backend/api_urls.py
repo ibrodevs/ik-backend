@@ -20,6 +20,8 @@ from news.views import (
     NewsPublicViewSet,
 )
 from office_content.views import (
+    EmployeeAdminViewSet,
+    EmployeePublicViewSet,
     LeadershipMemberAdminViewSet,
     LeadershipMemberPublicViewSet,
     OfficialDocumentAdminViewSet,
@@ -42,6 +44,7 @@ router.register(r'department-categories', DepartmentCategoryPublicViewSet, basen
 router.register(r'media', MediaItemPublicViewSet, basename='media-public')
 router.register(r'media-categories', MediaCategoryPublicViewSet, basename='media-category-public')
 router.register(r'leadership-members', LeadershipMemberPublicViewSet, basename='leadership-member-public')
+router.register(r'employees', EmployeePublicViewSet, basename='employee-public')
 router.register(r'documents', OfficialDocumentPublicViewSet, basename='document-public')
 router.register(r'procurements', ProcurementItemPublicViewSet, basename='procurement-public')
 router.register(r'projects', ProjectPublicViewSet, basename='project-public')
@@ -57,6 +60,7 @@ router.register(r'admin/department-leaders', DepartmentLeaderAdminViewSet, basen
 router.register(r'admin/media', MediaItemAdminViewSet, basename='media-admin')
 router.register(r'admin/media-categories', MediaCategoryAdminViewSet, basename='media-category-admin')
 router.register(r'admin/leadership-members', LeadershipMemberAdminViewSet, basename='leadership-member-admin')
+router.register(r'admin/employees', EmployeeAdminViewSet, basename='employee-admin')
 router.register(r'admin/documents', OfficialDocumentAdminViewSet, basename='document-admin')
 router.register(r'admin/procurements', ProcurementItemAdminViewSet, basename='procurement-admin')
 router.register(r'admin/projects', ProjectAdminViewSet, basename='project-admin')

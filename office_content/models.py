@@ -31,6 +31,38 @@ class LeadershipMember(models.Model):
         return self.full_name_ru
 
 
+class Employee(models.Model):
+    full_name_ru = models.CharField('ФИО (рус.)', max_length=255)
+    full_name_en = models.CharField('ФИО (англ.)', max_length=255)
+    full_name_kg = models.CharField('ФИО (кырг.)', max_length=255)
+
+    position_ru = models.CharField('Должность (рус.)', max_length=255)
+    position_en = models.CharField('Должность (англ.)', max_length=255)
+    position_kg = models.CharField('Должность (кырг.)', max_length=255)
+
+    phone = models.CharField('Телефон', max_length=64)
+    email = models.EmailField('Электронная почта')
+
+    photo = models.ImageField(
+        'Фотография',
+        upload_to='office/employees/',
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])],
+    )
+
+    order = models.PositiveIntegerField('Порядок', default=0)
+    is_active = models.BooleanField('Активно', default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('order', 'id')
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
+
+    def __str__(self):
+        return self.full_name_ru
+
+
 class OfficialDocument(models.Model):
     CATEGORY_REGULATION = 'regulations'
     CATEGORY_ORDER = 'orders'

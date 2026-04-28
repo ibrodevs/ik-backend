@@ -2,8 +2,10 @@ from rest_framework import permissions, viewsets
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 
 from backend.api_utils import get_lang_from_request
-from .models import LeadershipMember, OfficialDocument, ProcurementItem, Project
+from .models import Employee, LeadershipMember, OfficialDocument, ProcurementItem, Project
 from .serializers import (
+    EmployeeAdminSerializer,
+    EmployeePublicSerializer,
     LeadershipMemberAdminSerializer,
     LeadershipMemberPublicSerializer,
     OfficialDocumentAdminSerializer,
@@ -28,6 +30,14 @@ class LeadershipMemberPublicViewSet(_LangMixin, viewsets.ReadOnlyModelViewSet):
     pagination_class = None
     ordering_fields = ('order',)
     search_fields = ('full_name_ru', 'full_name_en', 'full_name_kg', 'position_ru', 'position_en', 'position_kg')
+
+
+class EmployeePublicViewSet(_LangMixin, viewsets.ReadOnlyModelViewSet):
+    serializer_class = EmployeePublicSerializer
+    queryset = Employee.objects.filter(is_active=True).order_by('order', 'id')
+    pagination_class = None
+    ordering_fields = ('order',)
+    search_fields = ('full_name_ru', 'full_name_en', 'full_name_kg', 'position_ru', 'position_en', 'position_kg', 'phone', 'email')
 
 
 class OfficialDocumentPublicViewSet(_LangMixin, viewsets.ReadOnlyModelViewSet):
@@ -75,6 +85,13 @@ class ProjectPublicViewSet(_LangMixin, viewsets.ReadOnlyModelViewSet):
 class LeadershipMemberAdminViewSet(viewsets.ModelViewSet):
     queryset = LeadershipMember.objects.all().order_by('order', 'id')
     serializer_class = LeadershipMemberAdminSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+
+class EmployeeAdminViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all().order_by('order', 'id')
+    serializer_class = EmployeeAdminSerializer
     permission_classes = (permissions.IsAuthenticated,)
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
